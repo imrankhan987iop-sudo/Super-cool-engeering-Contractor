@@ -1,0 +1,68 @@
+from pathlib import Path
+import zipfile
+
+base = Path("/mnt/data/super_cool_engineering_website")
+base.mkdir(exist_ok=True)
+
+html = """<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Super Cool Engineering & Contractor | HVAC Services Pakistan</title>
+<meta name="description" content="Professional HVAC, chiller, central AC, AHU, FCU, package unit and VRF/VRV services across Pakistan.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#172033;background:#f7f9fc;line-height:1.6}
+a{text-decoration:none}.top{background:#071a35;color:#fff;padding:9px 5%;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}
+nav{background:#fff;padding:16px 5%;display:flex;justify-content:space-between;box-shadow:0 2px 12px #0001}.logo{font-weight:800;color:#0757a6}
+nav a{margin-left:20px;color:#172033;font-weight:600}.hero{padding:85px 5%;color:#fff;background:linear-gradient(135deg,#071a35,#0757a6)}
+.hero h1{font-size:clamp(35px,6vw,64px);max-width:850px;line-height:1.1;margin:0}.hero p{font-size:20px;max-width:760px;margin:20px 0 30px}
+.btn{display:inline-block;padding:13px 21px;border-radius:8px;margin:5px;font-weight:700;background:#fff;color:#0757a6}.alt{background:#13b8c9;color:#fff}
+section{padding:65px 5%;max-width:1200px;margin:auto}.heading{text-align:center;margin-bottom:38px}.heading h2{font-size:34px;color:#071a35}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.card{background:#fff;padding:27px;border-radius:14px;box-shadow:0 5px 22px #071a3512}.card h3{color:#0757a6}.icon{font-size:32px}
+.about{background:#eef5fb;max-width:none}.about>*{max-width:1200px;margin-left:auto;margin-right:auto}
+.cta{background:#0757a6;color:#fff;max-width:none;text-align:center}.contactbox{max-width:800px;margin:auto;background:#f3f7fb;padding:30px;border-radius:15px}
+footer{background:#071a35;color:#fff;text-align:center;padding:30px 5%}.float{position:fixed;right:20px;bottom:20px;background:#20bd5a;color:#fff;padding:15px 18px;border-radius:50px;font-weight:bold}
+@media(max-width:700px){nav .links{display:none}.hero{padding:60px 5%}.hero p{font-size:17px}}
+</style></head><body>
+<div class="top"><span>Complete HVAC Solutions Across Pakistan</span><span>+92 312 7852902 | +92 325 3834275</span></div>
+<nav><div class="logo">SUPER COOL ENGINEERING</div><div class="links"><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+<header class="hero"><h1>Professional HVAC & Engineering Solutions Across Pakistan</h1>
+<p>Chillers, Central AC, AHU, FCU, Package Units, VRF/VRV, installation, maintenance, troubleshooting and AMC services.</p>
+<a class="btn" href="tel:+923127852902">Call Now</a><a class="btn alt" href="https://wa.me/923127852902">WhatsApp</a><a class="btn" href="#contact">Get a Quotation</a></header>
+<section id="services"><div class="heading"><h2>Our Services</h2><p>Complete HVAC support for commercial, industrial and institutional facilities.</p></div>
+<div class="grid">
+<div class="card"><div class="icon">❄️</div><h3>Chiller Services</h3><p>Maintenance, troubleshooting, servicing, leak testing, vacuuming and performance support.</p></div>
+<div class="card"><div class="icon">🏢</div><h3>Central AC</h3><p>Installation, maintenance, repair and system optimization.</p></div>
+<div class="card"><div class="icon">🌬️</div><h3>AHU & FCU</h3><p>Installation, servicing, coil cleaning, controls and preventive maintenance.</p></div>
+<div class="card"><div class="icon">⚙️</div><h3>Package Units</h3><p>Installation, repair, servicing and preventive maintenance.</p></div>
+<div class="card"><div class="icon">🔧</div><h3>VRF / VRV</h3><p>Installation, commissioning, troubleshooting and maintenance.</p></div>
+<div class="card"><div class="icon">🛠️</div><h3>AMC & Maintenance</h3><p>Planned preventive maintenance and annual maintenance contracts.</p></div>
+</div></section>
+<section id="about" class="about"><div class="heading"><h2>About Super Cool Engineering & Contractor</h2></div>
+<p>Super Cool Engineering & Contractor is an HVAC and engineering service company based in Karachi, Pakistan. We provide professional HVAC installation, maintenance, troubleshooting and annual maintenance services for commercial, industrial and institutional clients.</p></section>
+<section><div class="heading"><h2>Why Choose Us</h2></div><div class="grid">
+<div class="card"><h3>Technical Expertise</h3><p>Practical HVAC engineering and maintenance experience.</p></div>
+<div class="card"><h3>Complete Solutions</h3><p>From installation and commissioning to repair and AMC.</p></div>
+<div class="card"><h3>Nationwide Support</h3><p>Karachi-based service with support across Pakistan.</p></div>
+<div class="card"><h3>Fast Response</h3><p>Call or WhatsApp for quotations and service requirements.</p></div>
+</div></section>
+<section class="cta"><h2>Need HVAC Service or Maintenance?</h2><p>Contact Super Cool Engineering & Contractor today.</p>
+<a class="btn" href="tel:+923127852902">Call +92 312 7852902</a><a class="btn alt" href="https://wa.me/923127852902">WhatsApp Us</a></section>
+<section id="contact"><div class="heading"><h2>Contact Us</h2><p>Karachi, Pakistan — Services available across Pakistan</p></div>
+<div class="contactbox"><p><b>Company:</b> Super Cool Engineering & Contractor</p>
+<p><b>Phone:</b> <a href="tel:+923127852902">+92 312 7852902</a></p><p><b>Phone:</b> <a href="tel:+923253834275">+92 325 3834275</a></p>
+<p><b>WhatsApp:</b> <a href="https://wa.me/923127852902">Chat on WhatsApp</a></p>
+<p><b>Email:</b> <a href="mailto:Supercoolengineering516@gmail.com">Supercoolengineering516@gmail.com</a></p>
+<p><b>Address:</b> Bangla No. 2093, Mukhi Garden, Allama Iqbal Town, Karachi, Pakistan</p>
+<p><a href="https://www.google.com/maps/search/?api=1&query=Mukhi+Garden+Allama+Iqbal+Town+Karachi">Open Location in Google Maps</a></p></div></section>
+<footer>© 2026 Super Cool Engineering & Contractor. All Rights Reserved.</footer>
+<a class="float" href="https://wa.me/923127852902">WhatsApp</a>
+</body></html>"""
+
+(base/"index.html").write_text(html, encoding="utf-8")
+(base/"README.txt").write_text("Upload index.html to the root of your GitHub repository, then Settings > Pages > Deploy from branch > main > /(root) > Save.", encoding="utf-8")
+
+zip_path = Path("/mnt/data/Super_Cool_Engineering_Website.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    z.write(base/"index.html", "index.html")
+    z.write(base/"README.txt", "README.txt")
+print(zip_path)
